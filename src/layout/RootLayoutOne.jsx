@@ -8,7 +8,7 @@ const RootLayoutOne = () => {
     <>
       <HeaderOne />
       <Outlet />
-      <FooterOne />
+      {/* <FooterOne /> */}
       <AudioPlayerModalLayoutTwo />
     </>
   );

@@ -10,12 +10,12 @@ const HomeOne = () => {
   return (
     <>
       <Hero />
-      <FeaturedShows />
-      <WhyChooseUS />
-      <RecentEpisode />
-      <OurHost />
-      <Testimonial />
-      <NewsLetter bg={"texture-bg-1"} pb={"pb-120"} />
+      {/* <FeaturedShows /> */}
+      {/* <WhyChooseUS /> */}
+      {/* <RecentEpisode /> */}
+      {/* <OurHost /> */}
+      {/* <Testimonial /> */}
+      {/* <NewsLetter bg={"texture-bg-1"} pb={"pb-120"} /> */}
     </>
   );
 };
