@@ -4,10 +4,12 @@ import ListenOnBtns from "@/components/Shared/ListenOnBtns";
 import waveLine from "@/images/wave-line.png";
 import bannerImg from "@/images/hero1-main.png";
 import FadeDown from "@/motion/FadeDown";
+import { useTranslation } from 'react-i18next';
 import { Link } from "react-router-dom";
 import Flag from "react-flagpack";
 
 const Hero = () => {
+  const { t } =  useTranslation();
   return (
     <section className="hero-section texture-bg-2 pt-120">
       <div className="vector-line position-absolute top-50 start-50 translate-middle w-100 h-100 z-n1 mt-20">
@@ -24,16 +26,12 @@ const Hero = () => {
                 <img className="w-100" src={trackImg} alt="image" />
               </div>
               <FadeDown>
-                <h2 className="hero-title display-two mb-6">
-                  The <span className="tcp-1">#1</span> Online Debating
-                  Platform.
-                </h2>
+                <h2 className="hero-title display-two mb-6" dangerouslySetInnerHTML={{__html: t('headerTitle')}}/>
                 <p className="fs-xl fw-normal me-xl-20 pe-xxl-5">
-                Sharpen your skills, challenge ideas, and win big! Join random debates, compete for cash prizes in tournaments, and prove you&apos;re the ultimate debater.
+                {t('headerFirst')}
                 </p>
                 <br />
-                <p className="fs-xl fw-normal me-xl-20 pe-xxl-5">
-                  We&apos;re <b>soon</b> launching our app where you can randomly video debate with anyone. Join our waitlist if you like this idea and would like to be the first to get notified!
+                <p className="fs-xl fw-normal me-xl-20 pe-xxl-5" dangerouslySetInnerHTML={{__html: t('headerSecond')}}>
                 </p>
                 <br />
                 <div className="d-flex align-items-center justify-content-lg-start justify-content-center flex-wrap gap-sm-6 gap-3 mt-xxl-10 mt-lg-8 mt-6 mb-xxl-17 mb-lg-10 mb-8">
@@ -42,13 +40,13 @@ const Hero = () => {
                       type="email"
                       id="email"
                       className="p-3"
-                      placeholder="Your email"
+                      placeholder={t('form.yourEmail')}
                       name="email"
                     />
                   </div>
                   <Link to="/latest-episode" className="bttn-1 col-md-6 mt-2 col-10">
                     <span className="text-nowrap fw-semibold">
-                      Join The Waitlist
+                      {t('joinWaitlist')}
                     </span>
                     <span className="icon icon-right">
                       <i className="ti ti-arrow-right"></i>
