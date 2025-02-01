@@ -20,6 +20,7 @@
     "i18next": "^24.2.2",
     "i18next-browser-languagedetector": "^8.0.2",
     "i18next-http-backend": "^3.0.2",
+    "nodemailer": "^6.10.0",
     "react": "^18.2.0",
     "react-animate-height": "^3.2.3",
     "react-apexcharts": "^1.4.1",
@@ -39,6 +40,7 @@
   },
   "devDependencies": {
     "@hookform/devtools": "^4.3.1",
+    "@types/nodemailer": "^6.4.17",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react": "^4.0.3",
