@@ -1,15 +1,19 @@
 import SunShape from "@/components/ShapeAnimation/SunShape";
 import trackImg from "@/images/track-line.png";
-import ListenOnBtns from "@/components/Shared/ListenOnBtns";
 import waveLine from "@/images/wave-line.png";
 import bannerImg from "@/images/hero1-main.png";
 import FadeDown from "@/motion/FadeDown";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import Flag from "react-flagpack";
+
+const sendMail = async () => {
+  const res = await fetch('/.netlify/functions/send-waitlist-mail');
+
+  console.log(await res.text());
+}
 
 const Hero = () => {
-  const { t } =  useTranslation();
+  const { t } = useTranslation();
   return (
     <section className="hero-section texture-bg-2 pt-120">
       <div className="vector-line position-absolute top-50 start-50 translate-middle w-100 h-100 z-n1 mt-20">
@@ -26,13 +30,18 @@ const Hero = () => {
                 <img className="w-100" src={trackImg} alt="image" />
               </div>
               <FadeDown>
-                <h2 className="hero-title display-two mb-6" dangerouslySetInnerHTML={{__html: t('headerTitle')}}/>
+                <h2
+                  className="hero-title display-two mb-6"
+                  dangerouslySetInnerHTML={{ __html: t("headerTitle") }}
+                />
                 <p className="fs-xl fw-normal me-xl-20 pe-xxl-5">
-                {t('headerFirst')}
+                  {t("headerFirst")}
                 </p>
                 <br />
-                <p className="fs-xl fw-normal me-xl-20 pe-xxl-5" dangerouslySetInnerHTML={{__html: t('headerSecond')}}>
-                </p>
+                <p
+                  className="fs-xl fw-normal me-xl-20 pe-xxl-5"
+                  dangerouslySetInnerHTML={{ __html: t("headerSecond") }}
+                ></p>
                 <br />
                 <div className="d-flex align-items-center justify-content-lg-start justify-content-center flex-wrap gap-sm-6 gap-3 mt-xxl-10 mt-lg-8 mt-6 mb-xxl-17 mb-lg-10 mb-8">
                   <div className="input-wrapper alt-color d-grid col-md-6 col-10">
@@ -40,13 +49,13 @@ const Hero = () => {
                       type="email"
                       id="email"
                       className="p-3"
-                      placeholder={t('form.yourEmail')}
+                      placeholder={t("form.yourEmail")}
                       name="email"
                     />
                   </div>
-                  <Link to="/latest-episode" className="bttn-1 col-md-6 mt-2 col-10">
+                  <Link onClick={sendMail}>
                     <span className="text-nowrap fw-semibold">
-                      {t('joinWaitlist')}
+                      {t("joinWaitlist")}
                     </span>
                     <span className="icon icon-right">
                       <i className="ti ti-arrow-right"></i>
