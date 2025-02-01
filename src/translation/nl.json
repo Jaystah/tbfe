@@ -5,5 +5,9 @@
     "joinWaitlist": "Meld je aan voor de wachtlijst",
     "form": {
         "yourEmail": "Je emailadres"
+    },
+    "toast": {
+        "addedWaitlist": "Je bent toegevoegd aan de wachtlijst!",
+        "invalidEmail": "Voer een correcte emailadres in."
     }
 }

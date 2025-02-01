@@ -5,14 +5,44 @@ import bannerImg from "@/images/hero1-main.png";
 import FadeDown from "@/motion/FadeDown";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import { useState } from "react";
 
-const sendMail = async () => {
-  const res = await fetch('/.netlify/functions/send-waitlist-mail');
-
-  console.log(await res.text());
-}
+const validateEmail = (email) => {
+  return String(email)
+    .toLowerCase()
+    .match(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+};
 
 const Hero = () => {
+  const [email, setEmail] = useState('');
+  
+  const sendMail = async () => {
+    if(validateEmail(email)) {
+      try {
+        await fetch(`https://bjpmvg72qwlucfekmhlb5sz63i0xhgzl.lambda-url.eu-central-1.on.aws/?email=${email}`, {
+          method: 'POST'
+        });
+        return;
+      } catch (err) {
+        /// ...
+      } finally {
+        toast(t('toast.addedWaitlist'), {
+          type: 'success'
+        });
+      }
+      
+      /// ... toaast
+    } else {
+      toast(t('toast.invalidEmail'), {
+        type: 'error'
+      });
+      return;
+    }
+  
+  }
   const { t } = useTranslation();
   return (
     <section className="hero-section texture-bg-2 pt-120">
@@ -48,6 +78,7 @@ const Hero = () => {
                     <input
                       type="email"
                       id="email"
+                      onChange={(event) => setEmail(event.target.value)}
                       className="p-3"
                       placeholder={t("form.yourEmail")}
                       name="email"
@@ -61,6 +92,7 @@ const Hero = () => {
                       <i className="ti ti-arrow-right"></i>
                     </span>
                   </Link>
+                  <ToastContainer />
                   {/* <a
                     href="#newsletter"
                     className="bttn-1 bttn-outline alt-position"
