@@ -4,7 +4,6 @@ import waveLine from "@/images/wave-line.png";
 import bannerImg from "@/images/hero1-main.png";
 import FadeDown from "@/motion/FadeDown";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import { useState } from "react";
 
@@ -18,9 +17,12 @@ const validateEmail = (email) => {
 
 const Hero = () => {
   const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [added, setAdded] = useState(false);
   
   const sendMail = async () => {
     if(validateEmail(email)) {
+      setLoading(true);
       try {
         await fetch(`https://bjpmvg72qwlucfekmhlb5sz63i0xhgzl.lambda-url.eu-central-1.on.aws/?email=${email}`, {
           method: 'POST'
@@ -29,6 +31,8 @@ const Hero = () => {
       } catch (err) {
         /// ...
       } finally {
+        setLoading(false);
+        setAdded(true);
         toast(t('toast.addedWaitlist'), {
           type: 'success'
         });
@@ -84,14 +88,14 @@ const Hero = () => {
                       name="email"
                     />
                   </div>
-                  <Link onClick={sendMail}>
+                  { !added ? <button className="bttn-1" onClick={sendMail} disabled={loading}>
                     <span className="text-nowrap fw-semibold">
                       {t("joinWaitlist")}
                     </span>
                     <span className="icon icon-right">
                       <i className="ti ti-arrow-right"></i>
                     </span>
-                  </Link>
+                  </button> : <span className="text-nowrap fw-semibold">{t('toast.addedWaitlist')}</span>}
                   <ToastContainer />
                   {/* <a
                     href="#newsletter"
